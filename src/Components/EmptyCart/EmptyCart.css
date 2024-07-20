@@ -1,0 +1,12 @@
+.emptycart {
+  padding: 20px;
+  margin-left: 100px;
+  background-color: aliceblue;
+  font-size: 20px;
+  height: 200px;
+  width: 750px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
