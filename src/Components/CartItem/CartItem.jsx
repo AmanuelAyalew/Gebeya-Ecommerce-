@@ -5,7 +5,6 @@ import CartSummary from "../CartSummary/CartSummary";
 
 const CartItem = () => {
   const { items, Cartitems, removetocart, clacTotal } = useContext(ShopContext);
-
   return (
     <div>
       {items.map((item, index) => {

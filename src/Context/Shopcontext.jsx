@@ -7,12 +7,13 @@ export const ShopContext = createContext();
 
 const getdefaultcart = () => {
   let cart = {};
+  1;
+
   for (let index = 0; index <= items.length; index++) {
     cart[index] = 0;
   }
   return cart;
 };
-
 const ShopContextProvider = (props) => {
   const [Cartitems, setCartitems] = useState(getdefaultcart());
   const [quantity, setQuantity] = useState(1);

@@ -8,6 +8,16 @@
   align-items: center;
   justify-content: center;
 }
+
+. .displaybanner {
+  width: auto;
+  height: auto;
+  margin-top: 300;
+  margin-bottom: 200;
+  align-items: 400;
+  justify-content: center;
+  flex-direction: 3000;
+}
 .bannerbottom {
   display: flex;
   flex-direction: column;

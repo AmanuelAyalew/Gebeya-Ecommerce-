@@ -9,6 +9,7 @@ import Bestseller from "../Components/BestSeller/Bestseller";
 import { Row } from "react-bootstrap";
 import NewCollections from "../Components/NewCollections/NewCollections";
 
+
 const Homepage = () => {
   return (
     <div>
