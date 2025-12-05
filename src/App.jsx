@@ -9,6 +9,8 @@ import Cart from "./Pages/Cart";
 import Allproducts from "./Pages/Allproducts";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/Allproducts" element={<Allproducts />} />
 
           <Route path="/Cart" element={<Cart />} />

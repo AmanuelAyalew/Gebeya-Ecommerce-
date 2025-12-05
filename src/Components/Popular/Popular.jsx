@@ -9,7 +9,7 @@ const Popular = ({ productItems }) => {
   const { addtocart, quantity } = useContext(ShopContext);
   useEffect(() => {}, [productItems]);
   if (productItems.length === 0) {
-    return <h1 className="not-found">Product Not Found !!</h1>;
+    return <h1 className="not-found">Product NotFound !!</h1>;
   }
   return (
     <div>
