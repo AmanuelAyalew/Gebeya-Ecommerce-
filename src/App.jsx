@@ -11,6 +11,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
+import Checkout from "./Pages/Checkout";
 
 const App = () => {
   return (
@@ -24,8 +25,8 @@ const App = () => {
           <Route path="/Allproducts" element={<Allproducts />} />
 
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/display/:productid" element={<Display />} />
-          <Route path="/cart" element={<cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>
