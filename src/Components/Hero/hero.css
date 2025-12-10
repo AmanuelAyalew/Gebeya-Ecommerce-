@@ -1,1 +1,37 @@
-/* Styles moved to Tailwind classes in Hero.jsx */
+/* Small animations for hero floating cards */
+.floating-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  transform: translateY(0);
+  animation: float 6s ease-in-out infinite;
+}
+.floating-card.left-0 {
+  left: -24px;
+}
+.floating-card.right-0 {
+  right: -24px;
+}
+.floating-card.top-6 {
+  top: 24px;
+}
+.floating-card.bottom-6 {
+  bottom: 24px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
