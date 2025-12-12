@@ -172,6 +172,12 @@ const Navbar = () => {
               >
                 Contact
               </Link>
+              <Link
+                to="/admin"
+                className="hover:text-black/70 transition-colors"
+              >
+                Admin
+              </Link>
             </div>
 
             {/* Right Side */}
