@@ -9,23 +9,30 @@ const ProductManagement = () => {
     new_price: '',
     old_price: '',
   });
+  const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
-    // In a real application, you would fetch products from an API here.
-    // For now, we'll use dummy data.
-    setProducts([
-      { id: 1, name: 'Dummy Product 1', image: 'placeholder.png', category: 'Electronics', new_price: 100, old_price: 120 },
-      { id: 2, name: 'Dummy Product 2', image: 'placeholder.png', category: 'Clothing', new_price: 50, old_price: 60 },
-    ]);
+    fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    const response = await fetch('http://localhost:5000/products');
+    const data = await response.json();
+    setProducts(data);
+  };
 
   const handleChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
-  const handleAddProduct = () => {
-    // In a real application, you would send newProduct to an API.
-    setProducts([...products, { ...newProduct, id: products.length + 1 }]);
+  const handleAddProduct = async () => {
+    const response = await fetch('http://localhost:5000/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newProduct),
+    });
+    const data = await response.json();
+    setProducts([...products, data]);
     setNewProduct({
       name: '',
       image: '',
@@ -35,8 +42,37 @@ const ProductManagement = () => {
     });
   };
 
-  const handleDeleteProduct = (id) => {
-    setProducts(products.filter(product => product.id !== id));
+  const handleDeleteProduct = async (id) => {
+    await fetch(`http://localhost:5000/products/${id}`, {
+      method: 'DELETE',
+    });
+    setProducts(products.filter((product) => product.id !== id));
+  };
+
+  const handleEditClick = (product) => {
+    setEditingProduct(product);
+  };
+
+  const handleEditChange = (e) => {
+    setEditingProduct({ ...editingProduct, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdateProduct = async () => {
+    await fetch(`http://localhost:5000/products/${editingProduct.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editingProduct),
+    });
+    setProducts(
+      products.map((product) =>
+        product.id === editingProduct.id ? editingProduct : product
+      )
+    );
+    setEditingProduct(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingProduct(null);
   };
 
   return (
@@ -95,6 +131,68 @@ const ProductManagement = () => {
         </button>
       </div>
 
+      {editingProduct && (
+        <div className="bg-white p-4 rounded shadow-md mb-6">
+          <h3 className="text-xl font-semibold mb-3">Edit Product</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Product Name"
+              value={editingProduct.name}
+              onChange={handleEditChange}
+              className="border p-2 rounded"
+            />
+            <input
+              type="text"
+              name="image"
+              placeholder="Image URL"
+              value={editingProduct.image}
+              onChange={handleEditChange}
+              className="border p-2 rounded"
+            />
+            <input
+              type="text"
+              name="category"
+              placeholder="Category"
+              value={editingProduct.category}
+              onChange={handleEditChange}
+              className="border p-2 rounded"
+            />
+            <input
+              type="number"
+              name="new_price"
+              placeholder="New Price"
+              value={editingProduct.new_price}
+              onChange={handleEditChange}
+              className="border p-2 rounded"
+            />
+            <input
+              type="number"
+              name="old_price"
+              placeholder="Old Price"
+              value={editingProduct.old_price}
+              onChange={handleEditChange}
+              className="border p-2 rounded"
+            />
+          </div>
+          <div className="mt-4">
+            <button
+              onClick={handleUpdateProduct}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mr-2"
+            >
+              Update Product
+            </button>
+            <button
+              onClick={handleCancelEdit}
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="bg-white p-4 rounded shadow-md">
         <h3 className="text-xl font-semibold mb-3">Existing Products</h3>
         <div className="overflow-x-auto">
@@ -116,12 +214,22 @@ const ProductManagement = () => {
                   <td className="py-2 px-4 border-b">{product.id}</td>
                   <td className="py-2 px-4 border-b">{product.name}</td>
                   <td className="py-2 px-4 border-b">
-                    <img src={product.image} alt={product.name} className="h-12 w-12 object-cover" />
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="h-12 w-12 object-cover"
+                    />
                   </td>
                   <td className="py-2 px-4 border-b">{product.category}</td>
                   <td className="py-2 px-4 border-b">${product.new_price}</td>
                   <td className="py-2 px-4 border-b">${product.old_price}</td>
                   <td className="py-2 px-4 border-b">
+                    <button
+                      onClick={() => handleEditClick(product)}
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2"
+                    >
+                      Edit
+                    </button>
                     <button
                       onClick={() => handleDeleteProduct(product.id)}
                       className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"

@@ -1,0 +1,15 @@
+{
+  "products": [
+    { "id": 1, "name": "Wireless Earbuds", "image": "/images/NewCollections/product_1.png", "category": "Electronics", "new_price": 99.99, "old_price": 129.99 },
+    { "id": 2, "name": "Smart Watch", "image": "/images/NewCollections/product_2.png", "category": "Electronics", "new_price": 199.99, "old_price": 249.99 },
+    { "id": 3, "name": "Leather Wallet", "image": "/images/NewCollections/product_3.png", "category": "Accessories", "new_price": 35.00, "old_price": 45.00 }
+  ],
+  "users": [
+    { "id": 1, "name": "Admin User", "email": "admin@example.com", "role": "admin" },
+    { "id": 2, "name": "Regular User", "email": "user@example.com", "role": "user" }
+  ],
+  "orders": [
+    { "id": 1, "userId": 1, "total": 150.00, "status": "Pending", "date": "2023-01-01" },
+    { "id": 2, "userId": 2, "total": 75.50, "status": "Completed", "date": "2023-01-05" }
+  ]
+}
